@@ -28,10 +28,5 @@ app.use("/api/comments", commentRoutes);
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
-
-  // 🟡 Only open browser locally, not on Render
-  if (process.env.NODE_ENV !== "production") {
-    open.default(`http://localhost:${PORT}`);
-  }
+  console.log(`Server is running on port ${PORT}`);
 });
