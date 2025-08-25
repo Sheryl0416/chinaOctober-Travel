@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Register</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <!-- Register Column -->
+        <div class="box left">
+          <h2>Create Account</h2>
+          <input type="email" id="reg_email" placeholder="Email" />
+          <input type="password" id="reg_password" placeholder="Password" />
+          <button onclick="register()">Register</button>
+          <div id="register-msg" class="message"></div>
+        </div>
+
+        <!-- Login Column -->
+        <div class="box right">
+          <h2>Login</h2>
+          <input type="email" id="login_email" placeholder="Email" />
+          <input type="password" id="login_password" placeholder="Password" />
+          <button onclick="login()">Login</button>
+          <div id="login-msg" class="message"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">Sheryl@2025</footer>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
