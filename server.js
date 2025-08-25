@@ -7,28 +7,31 @@ const open = require("open");
 
 dotenv.config();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// 1️⃣ Force root to redirect to login.html BEFORE static middleware
+// Force root to login.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-// 2️⃣ Static files (after redirect so index.html doesn't override)
+// Serve static files
 app.use(express.static("public"));
 
-// 3️⃣ Routes
+// Routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
 const commentRoutes = require("./routes/commentRoutes");
 app.use("/api/comments", commentRoutes);
 
-// 4️⃣ Start server
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
-  open.default(`http://localhost:${PORT}`);
+
+  // 🟡 Only open browser locally, not on Render
+  if (process.env.NODE_ENV !== "production") {
+    open.default(`http://localhost:${PORT}`);
+  }
 });
