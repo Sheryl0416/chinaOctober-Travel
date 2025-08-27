@@ -71,14 +71,37 @@ async function login() {
       body: JSON.stringify({ email, password }),
     });
 
-    const result = await res.json();
+    // 💡 Check content type before parsing
+    const contentType = res.headers.get("content-type");
+    let result;
+
+    if (contentType && contentType.includes("application/json")) {
+      result = await res.json();
+    } else {
+      const text = await res.text();
+      result = { message: text };
+    }
 
     if (res.ok) {
       showMessage("login-msg", "✅ " + result.message, true);
-      localStorage.setItem("token", result.token); // store token
+      localStorage.setItem("token", result.token);
       setTimeout(() => {
         window.location.href = "index.html";
       }, 1200);
+    } else if (res.status === 401) {
+      if (result.message.includes("not found")) {
+        showMessage("login-msg", "❌ Email not found.", false);
+      } else if (result.message.includes("Invalid password")) {
+        showMessage("login-msg", "❌ Wrong email or password.", false);
+      } else {
+        showMessage("login-msg", "❌ Unauthorized.", false);
+      }
+    } else if (res.status === 500) {
+      showMessage(
+        "login-msg",
+        "❌ Database error. Please try again later.",
+        false
+      );
     } else {
       showMessage(
         "login-msg",
@@ -87,6 +110,11 @@ async function login() {
       );
     }
   } catch (err) {
-    showMessage("login-msg", "❌ Something went wrong.", false);
+    console.error("Login error:", err);
+    showMessage(
+      "login-msg",
+      "❌ Server not responding. Try again later.",
+      false
+    );
   }
 }

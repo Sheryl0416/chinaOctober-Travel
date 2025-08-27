@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           comment: commentText,
-          page: "places", // ✅ THIS IS THE FIX
+          page: "places", // specify the page
         }),
       });
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadComments() {
     try {
-      const res = await fetch("/api/comments?page=places"); // ✅ use ?page=places
+      const res = await fetch("/api/comments?page=places"); // get comments for this page
       const data = await res.json();
 
       commentsList.innerHTML = "";
@@ -69,5 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function showMessage(text, isSuccess) {
     commentMessage.textContent = text;
     commentMessage.className = isSuccess ? "message success" : "message error";
+
+    // Auto-clear message after 3 seconds
+    setTimeout(() => {
+      commentMessage.textContent = "";
+      commentMessage.className = "";
+    }, 3000);
   }
 });
