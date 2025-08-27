@@ -71,7 +71,6 @@ async function login() {
       body: JSON.stringify({ email, password }),
     });
 
-    // 💡 Check content type before parsing
     const contentType = res.headers.get("content-type");
     let result;
 
@@ -85,6 +84,7 @@ async function login() {
     if (res.ok) {
       showMessage("login-msg", "✅ " + result.message, true);
       localStorage.setItem("token", result.token);
+      localStorage.setItem("email", email); // ✅ Save email for use in comment section
       setTimeout(() => {
         window.location.href = "index.html";
       }, 1200);

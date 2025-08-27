@@ -91,12 +91,15 @@
       <section class="comment-section">
         <h2>💬 Leave a Comment</h2>
         <form id="commentForm">
-          <input type="text" id="comment" />
+          <textarea
+            id="comment"
+            placeholder="Write your thoughts..."
+            rows="4"
+          ></textarea>
           <button type="submit">Submit</button>
           <div id="comment-message"></div>
         </form>
-
-        <ul id="commentsList"></ul>
+        <ul id="commentsList" class="comment-list"></ul>
       </section>
     </main>
 

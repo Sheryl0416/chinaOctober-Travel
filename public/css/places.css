@@ -107,27 +107,64 @@ h2 {
   color: #a21caf;
 }
 
-#commentInput {
+#comment {
   width: 100%;
-  height: 100px;
   padding: 1rem;
   border: 1px solid #e0d4ec;
   border-radius: 8px;
   font-size: 1rem;
-  margin-bottom: 1rem;
   resize: vertical;
+  margin-bottom: 1rem;
+}
+
+#commentForm button {
+  background-color: #9333ea;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#commentForm button:hover {
+  background-color: #6b21a8;
+}
+
+#comment-message {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.message.success {
+  color: green;
+}
+.message.error {
+  color: red;
 }
 
 .comment-list {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  list-style: none;
+  padding: 0;
 }
 
-.comment-item {
+.comment-list li {
   background: #fbe7ff;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
   box-shadow: 0 2px 5px rgba(128, 0, 128, 0.05);
+}
+
+.comment-list li strong {
+  color: #4c1d95;
+}
+
+.comment-actions {
+  margin-top: 0.5rem;
 }
 
 .comment-actions button {
@@ -184,4 +221,13 @@ h2 {
 
 #commentForm button:hover {
   background-color: #6b21a8;
+}
+
+.edit-input {
+  margin-right: 5px;
+  padding: 4px;
+}
+.save-btn,
+.cancel-btn {
+  margin-left: 5px;
 }

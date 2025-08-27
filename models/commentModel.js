@@ -8,18 +8,18 @@ const commentModel = {
 
   async getCommentsByPage(page) {
     const sql = `SELECT * FROM comment WHERE page = $1 ORDER BY created_at DESC`;
-    const { rows } = await dbPromise.query(sql, [page]);
-    return rows;
+    const result = await dbPromise.query(sql, [page]);
+    return result.rows;
   },
 
-  async deleteComment(id) {
-    const sql = `DELETE FROM comment WHERE id = $1`;
-    await dbPromise.query(sql, [id]);
+  async deleteComment(id, user) {
+    const sql = `DELETE FROM comment WHERE id = $1 AND "user" = $2`;
+    await dbPromise.query(sql, [id, user]);
   },
 
-  async updateComment(id, comment) {
-    const sql = `UPDATE comment SET comment = $1, updated_at = NOW() WHERE id = $2`;
-    await dbPromise.query(sql, [comment, id]);
+  async updateComment(id, comment, user) {
+    const sql = `UPDATE comment SET comment = $1, updated_at = NOW() WHERE id = $2 AND "user" = $3`;
+    await dbPromise.query(sql, [comment, id, user]);
   },
 };
 
