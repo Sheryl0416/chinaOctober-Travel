@@ -1,3 +1,4 @@
+// db.js
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -20,7 +21,6 @@ pool.connect((err, client, release) => {
   }
 });
 
-// Export for use in models
 module.exports = {
   dbPromise: pool,
 };
