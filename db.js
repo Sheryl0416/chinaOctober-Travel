@@ -2,12 +2,12 @@ const { Pool } = require("pg");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const isRender = process.env.DATABASE_URL.includes("render");
+
 // Create a new connection pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL.includes("render")
-    ? { rejectUnauthorized: false }
-    : false,
+  ssl: isRender ? { rejectUnauthorized: false } : false,
 });
 
 // Test connection
