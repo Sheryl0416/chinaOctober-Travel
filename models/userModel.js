@@ -1,11 +1,12 @@
-const { db } = require("./db");
+const { dbPromise } = require("../db");
 
-exports.findUserByEmail = (email, callback) => {
-  const sql = "SELECT * FROM users WHERE email = ?";
-  db.query(sql, [email], callback);
+exports.findUserByEmail = async (email) => {
+  const sql = `SELECT * FROM users WHERE email = $1`;
+  const { rows } = await dbPromise.query(sql, [email]);
+  return rows;
 };
 
-exports.insertUser = (email, password, callback) => {
-  const sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-  db.query(sql, [email, password], callback);
+exports.insertUser = async (email, password) => {
+  const sql = `INSERT INTO users (email, password) VALUES ($1, $2)`;
+  await dbPromise.query(sql, [email, password]);
 };
